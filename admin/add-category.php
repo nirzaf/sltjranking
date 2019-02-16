@@ -30,22 +30,18 @@ $query->bindParam(':Pword',$Password,PDO::PARAM_STR);
 $query->bindParam(':type',$branchType,PDO::PARAM_STR);
 $query->bindParam(':status',$status,PDO::PARAM_STR);
 $query->execute();
-try{
-    $lastInsertId = $dbh->lastInsertId();
-    if($lastInsertId)
-        {
-            $_SESSION['msg']="Branch Added successfully";
-            header('location:manage-categories.php');
-        }
-        else 
-        {
-            $_SESSION['error']="Something went wrong. Please try again";
-        } 
-    }
-    catch (Exception $e)
-    {
-        echo "<script>alert($e->getMessage();)</script>";
-    }
+if($lastInsertId)
+{
+$_SESSION['msg']="Brand Listed successfully";
+header('location:manage-categories.php');
+}
+else 
+{
+$_SESSION['error']="Something went wrong. Please try again";
+header('location:manage-categories.php');
+}
+
+}
 }
 
 ?>
