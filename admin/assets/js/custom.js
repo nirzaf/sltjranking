@@ -21,9 +21,7 @@
 
         },
         dataTable_fun: function () {
-
             $('#dataTables-example').dataTable();
-
         },
        
         custom_fun:function()
@@ -31,9 +29,6 @@
             /*====================================
              WRITE YOUR   SCRIPTS  BELOW
             ======================================*/
-
-
-
 
         },
 

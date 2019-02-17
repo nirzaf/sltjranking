@@ -11,17 +11,9 @@ else{
 if(isset($_POST['add']))
 {
 $bookname=$_POST['bookname'];
-$category=$_POST['category'];
-$author=$_POST['author'];
-$isbn=$_POST['isbn'];
-$price=$_POST['price'];
-$sql="INSERT INTO  tblbooks(BookName,CatId,AuthorId,ISBNNumber,BookPrice) VALUES(:bookname,:category,:author,:isbn,:price)";
+$sql="INSERT INTO  tblbooks(BookName) VALUES(:bookname)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':bookname',$bookname,PDO::PARAM_STR);
-$query->bindParam(':category',$category,PDO::PARAM_STR);
-$query->bindParam(':author',$author,PDO::PARAM_STR);
-$query->bindParam(':isbn',$isbn,PDO::PARAM_STR);
-$query->bindParam(':price',$price,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
