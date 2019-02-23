@@ -7,26 +7,27 @@ if (strlen($_SESSION['alogin']) == 0) {
 } else {
 
     if (isset($_POST['create'])) {
-        $id = $_POST['branchID'];
-        $brachName = $_POST['branchName'];
-        $branchCity = $_POST['brnachCity'];
+        $id = $_POST['BrachID'];
+        $branchName = $_POST['BranchName'];
+        $branchCity = $_POST['BranchCity'];
         $branchDistrict = $_POST['District'];
         $userName = $_POST['Username'];
         $Password = $_POST['Password'];
-        $branchType = $_POST['type'];
-        $status = $_POST['status'];
+        $branchType = intval($_POST['BranchType']);
+        $status = intval($_POST['Status']);
 
-        $sql = "INSERT INTO  tblcategory(id,CategoryName,BranchCity,BranchDistrict,Username,Password,Type,Status) VALUES(:id,:category,:Bcity,:Bdistrict:UName,:PWord,:type,:status)";
+        $sql = "INSERT INTO tblcategory(id,CategoryName,BranchCity,BranchDistrict,Username,Password,Type,Status) VALUES(:Id,:BranchName,:BranchCity,:BranchDistrict,:Username,:Password,:Type,:Status)";
         $query = $dbh->prepare($sql);
-        $query->bindParam(':id', $id, PDO::PARAM_STR);
-        $query->bindParam(':category', $brachName, PDO::PARAM_STR);
-        $query->bindParam(':Bcity', $branchCity, PDO::PARAM_STR);
-        $query->bindParam(':Bdistrict', $branchDistrict, PDO::PARAM_STR);
-        $query->bindParam(':UName', $userName, PDO::PARAM_STR);
-        $query->bindParam(':Pword', $Password, PDO::PARAM_STR);
-        $query->bindParam(':type', $branchType, PDO::PARAM_STR);
-        $query->bindParam(':status', $status, PDO::PARAM_STR);
+        $query->bindParam(':Id', $id, PDO::PARAM_STR);
+        $query->bindParam(':BranchName', $branchName, PDO::PARAM_STR);
+        $query->bindParam(':BranchCity', $branchCity, PDO::PARAM_STR);
+        $query->bindParam(':BranchDistrict', $branchDistrict, PDO::PARAM_STR);
+        $query->bindParam(':Username', $userName, PDO::PARAM_STR);
+        $query->bindParam(':Password', $Password, PDO::PARAM_STR);
+        $query->bindParam(':Type', $branchType, PDO::PARAM_INT);
+        $query->bindParam(':Status', $status, PDO::PARAM_INT);
         $query->execute();
+        $lastInsertId = $dbh->lastInsertId();
         if ($lastInsertId) {
             $_SESSION['msg'] = "Brand Listed successfully";
             header('location:manage-categories.php');
@@ -58,7 +59,6 @@ if (strlen($_SESSION['alogin']) == 0) {
     <!------MENU SECTION START-->
     <?php include('includes/header.php'); ?>
     <!-- MENU SECTION END-->
-    <div class="content-wra
     <div class="content-wrapper">
     <div class="container">
         <div class="row pad-botm">
@@ -77,17 +77,17 @@ if (strlen($_SESSION['alogin']) == 0) {
                     <form role="form" method="post">
                         <div class="form-group">
                             <label>Branch ID</label>
-                            <input class="form-control" type="text" name="branchID" autocomplete="off" required/>
+                            <input class="form-control" type="text" name="BranchID" autocomplete="off" />
 
                             <label>Branch Name</label>
-                            <input class="form-control" type="text" name="branchName" autocomplete="off" required/>
+                            <input class="form-control" type="text" name="BranchName" autocomplete="off" />
 
                             <label>Branch City</label>
-                            <input class="form-control" type="text" name="branchCity" required/>
+                            <input class="form-control" type="text" name="BranchCity" />
 
                             <p>
                                 <label>Select District</label>
-                                <select id="District" name="District">
+                                <select name="District">
                                     <option value="Ampara">Ampara</option>
                                     <option value="Anuradhapura">Anuradhapura</option>
                                     <option value="Badulla">Badulla</option>
@@ -117,28 +117,28 @@ if (strlen($_SESSION['alogin']) == 0) {
                             </p>
 
                             <label>Username</label>
-                            <input class="form-control" type="text" name="Username" required/>
+                            <input class="form-control" type="text" name="Username" />
 
                             <label>Password</label>
-                            <input class="form-control" type="password" name="Password" required/>
+                            <input class="form-control" type="password" name="Password"/>
 
                             <label>Confirm Password</label>
-                            <input class="form-control" type="password" name="Confirm-Password" required/>
+                            <input class="form-control" type="password" name="Confirm-Password"/>
 
                             <label>Branch Type</label>
                             <div class="form-group">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="type" id="type1" value="1">Head Office
+                                        <input type="radio" name="BranchType" value="1">Head Office
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="type" id="type2" value="2">District Head
+                                        <input type="radio" name="BranchType" value="2">District Head
                                     </label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="type" id="type3" value="3" checked="checked">Regular
+                                            <input type="radio" name="BranchType" value="3" checked="checked">Regular
                                             Branch
                                         </label>
                                     </div>
@@ -149,12 +149,12 @@ if (strlen($_SESSION['alogin']) == 0) {
                                 <label>Status</label>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="status" id="status1" value="1" checked="checked">Active
+                                        <input type="radio" name="Status" value="1" checked="checked">Active
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="status" id="status2" value="0">Inactive
+                                        <input type="radio" name="Status" value="0">Inactive
                                     </label>
                                 </div>
 
@@ -168,7 +168,6 @@ if (strlen($_SESSION['alogin']) == 0) {
 
     </div>
 
-    </div>
     </div>
     <!-- CONTENT-WRAPPER SECTION END-->
     <?php include('includes/footer.php'); ?>

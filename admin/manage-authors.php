@@ -14,7 +14,7 @@ $sql = "delete from tblauthors  WHERE id=:id";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':id',$id, PDO::PARAM_STR);
 $query -> execute();
-$_SESSION['delmsg']="Author deleted";
+$_SESSION['delmsg']="Event Deleted";
 header('location:manage-authors.php');
 
 }
@@ -28,7 +28,7 @@ header('location:manage-authors.php');
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Online Library Management System | Manage Authors</title>
+    <title>SLTJ Ranking Management System | Manage Events</title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -49,7 +49,7 @@ header('location:manage-authors.php');
          <div class="container">
         <div class="row pad-botm">
             <div class="col-md-12">
-                <h4 class="header-line">Manage Authors</h4>
+                <h4 class="header-line">Manage Events</h4>
     </div>
      <div class="row">
     <?php if($_SESSION['error']!="")
@@ -104,7 +104,7 @@ header('location:manage-authors.php');
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           Authors Listing
+                           Events Listing
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -112,10 +112,10 @@ header('location:manage-authors.php');
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Author</th>
+                                            <th>Event Name</th>
                                          
                                             <th>Creation Date</th>
-                                            <th>Updation Date</th>
+                                            <th>Points</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -133,7 +133,7 @@ foreach($results as $result)
                                             <td class="center"><?php echo htmlentities($cnt);?></td>
                                             <td class="center"><?php echo htmlentities($result->AuthorName);?></td>
                                             <td class="center"><?php echo htmlentities($result->creationDate);?></td>
-                                            <td class="center"><?php echo htmlentities($result->UpdationDate);?></td>
+                                            <td class="center"><?php echo htmlentities($result->Points);?></td>
                                             <td class="center">
 
                                             <a href="edit-author.php?athrid=<?php echo htmlentities($result->id);?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button> 

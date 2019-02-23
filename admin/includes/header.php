@@ -35,20 +35,13 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown"> Add Events <i class="fa fa-angle-down"></i></a>
+                                <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown"> Events <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="add-author.php">Add Events</a></li>
                                      <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-authors.php">Manage Events</a></li>
                                 </ul>
                             </li>
- <li>
-                                <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown"> Program <i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="add-book.php">Add Program</a></li>
-                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-books.php">Manage Program</a></li>
-                                </ul>
-                            </li>
-
+ 
                            <li>
                                 <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown"> Ranking Reports <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">

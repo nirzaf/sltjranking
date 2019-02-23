@@ -11,13 +11,17 @@ else{
 if(isset($_POST['update']))
 {
 $athrid=intval($_GET['athrid']);
-$author=$_POST['author'];
-$sql="update  tblauthors set AuthorName=:author where id=:athrid";
+$event=$_POST['event'];
+$description = $_POST['description'];
+$points = intval($_POST['points']);
+$sql="update tblauthors set AuthorName=:event, Description=:description, Points=:points where id=:athrid";
 $query = $dbh->prepare($sql);
-$query->bindParam(':author',$author,PDO::PARAM_STR);
+$query->bindParam(':event',$event,PDO::PARAM_STR);
 $query->bindParam(':athrid',$athrid,PDO::PARAM_STR);
+$query->bindParam(':description',$description,PDO::PARAM_STR);
+$query->bindParam(':points',$points,PDO::PARAM_STR);
 $query->execute();
-$_SESSION['updatemsg']="Author info updated successfully";
+$_SESSION['updatemsg']="Event info updated successfully";
 header('location:manage-authors.php');
 
 
@@ -31,7 +35,7 @@ header('location:manage-authors.php');
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Online Library Management System | Add Author</title>
+    <title>SLTJ Ranking Management System | Edit Event</title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -51,7 +55,7 @@ header('location:manage-authors.php');
          <div class="container">
         <div class="row pad-botm">
             <div class="col-md-12">
-                <h4 class="header-line">Add Author</h4>
+                <h4 class="header-line">Edit Event Details</h4>
                 
                             </div>
 
@@ -60,12 +64,12 @@ header('location:manage-authors.php');
 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3"">
 <div class="panel panel-info">
 <div class="panel-heading">
-Author Info
+Event Info
 </div>
 <div class="panel-body">
 <form role="form" method="post">
 <div class="form-group">
-<label>Author Name</label>
+<label>Event Name</label>
 <?php 
 $athrid=intval($_GET['athrid']);
 $sql = "SELECT * from  tblauthors where id=:athrid";
@@ -78,9 +82,46 @@ if($query->rowCount() > 0)
 {
 foreach($results as $result)
 {               ?>   
-<input class="form-control" type="text" name="author" value="<?php echo htmlentities($result->AuthorName);?>" required />
+<input class="form-control" type="text" name="event" value="<?php echo htmlentities($result->AuthorName);?>" required />
 <?php }} ?>
 </div>
+
+<div class="form-group">
+<label>Event Description</label>
+<?php 
+$athrid=intval($_GET['athrid']);
+$sql = "SELECT * from  tblauthors where id=:athrid";
+$query = $dbh -> prepare($sql);
+$query->bindParam(':athrid',$athrid,PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $result)
+{               ?>   
+<input class="form-control" type="text" name="description" value="<?php echo htmlentities($result->Description);?>"/>
+<?php }} ?>
+</div>
+
+<div class="form-group">
+<label>Points</label>
+<?php 
+$athrid=intval($_GET['athrid']);
+$sql = "SELECT * from  tblauthors where id=:athrid";
+$query = $dbh -> prepare($sql);
+$query->bindParam(':athrid',$athrid,PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $result)
+{               ?>   
+<input class="form-control" type="text" name="points" value="<?php echo htmlentities($result->Points);?>" required />
+<?php }} ?>
+</div>
+
 
 <button type="submit" name="update" class="btn btn-info">Update </button>
 
