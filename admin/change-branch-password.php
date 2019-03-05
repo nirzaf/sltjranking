@@ -2,6 +2,7 @@
 session_start();
 include('includes/config.php');
 error_reporting(0);
+$branchName ="";
 if(strlen($_SESSION['alogin'])==0)
     {   
 header('location:index.php');
@@ -11,24 +12,26 @@ if(isset($_POST['change']))
   {
 $password=md5($_POST['password']);
 $newpassword=md5($_POST['newpassword']);
-$username=$_SESSION['alogin'];
-  $sql ="SELECT Password FROM admin where UserName=:username and Password=:password";
+$branchId =$_POST['branch'];
+$sql ="SELECT id,CategoryName FROM tblcategory where Password=:password AND id=:id";
 $query= $dbh -> prepare($sql);
-$query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
+$query-> bindParam(':id', $branchId, PDO::PARAM_STR);
 $query-> execute();
 $results = $query -> fetchAll(PDO::FETCH_OBJ);
 if($query -> rowCount() > 0)
 {
-$con="update admin set Password=:newpassword where UserName=:username";
+foreach($results as $re)
+{ $branchName = $re->CategoryName;}
+$con="update tblcategory set Password=:newpassword where id=:username";
 $chngpwd1 = $dbh->prepare($con);
-$chngpwd1-> bindParam(':username', $username, PDO::PARAM_STR);
+$chngpwd1-> bindParam(':username', $branchId, PDO::PARAM_STR);
 $chngpwd1-> bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
 $chngpwd1->execute();
-$msg="Your Password changed succesfully";
+$msg= $branchName. " Password changed succesfully";
 }
 else {
-$error="Your current password is wrong";  
+$error="Given Current password is wrong";  
 }
 }
 
@@ -100,17 +103,34 @@ Change Password
 <form role="form" method="post" onSubmit="return valid();" name="chngpwd">
 
 <div class="form-group">
-<label>Current Password</label>
+<label>Branch Name<span style="color:red;">*</span></label>
+                                    <select class="form-control" name="branch" required="required">
+                                        <?php
+                                $sql = "SELECT * FROM tblcategory";
+                                $query = $dbh->prepare($sql);
+                                $query->execute();
+                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                $cnt = 1;
+                                if ($query->rowCount() > 0) {
+                                    foreach ($results as $result) { ?>
+                                        <option value="<?php echo htmlentities($result->id); ?>">
+                                            <?php echo htmlentities($result->CategoryName); ?></option>
+                                        <?php } }?>
+                                    </select>
+</div>
+
+<div class="form-group">
+<label>Current Password<span style="color:red;">*</span></label>
 <input class="form-control" type="password" name="password" autocomplete="off" required  />
 </div>
 
 <div class="form-group">
-<label>Enter Password</label>
+<label>Enter Password<span style="color:red;">*</span></label>
 <input class="form-control" type="password" name="newpassword" autocomplete="off" required  />
 </div>
 
 <div class="form-group">
-<label>Confirm Password </label>
+<label>Confirm Password <span style="color:red;">*</span></label>
 <input class="form-control"  type="password" name="confirmpassword" autocomplete="off" required  />
 </div>
 

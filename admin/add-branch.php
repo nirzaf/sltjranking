@@ -1,18 +1,18 @@
 <?php
 session_start();
-error_reporting(0);
+//error_reporting(0);
 include('includes/config.php');
 if (strlen($_SESSION['alogin']) == 0) {
     header('location:index.php');
 } else {
 
     if (isset($_POST['create'])) {
-        $id = $_POST['BrachID'];
+        $id = $_POST['BranchID'];
         $branchName = $_POST['BranchName'];
         $branchCity = $_POST['BranchCity'];
         $branchDistrict = $_POST['District'];
         $userName = $_POST['Username'];
-        $Password = $_POST['Password'];
+        $Password = md5($_POST['Password']);
         $branchType = intval($_POST['BranchType']);
         $status = intval($_POST['Status']);
 
@@ -28,12 +28,12 @@ if (strlen($_SESSION['alogin']) == 0) {
         $query->bindParam(':Status', $status, PDO::PARAM_INT);
         $query->execute();
         $lastInsertId = $dbh->lastInsertId();
-        if ($lastInsertId) {
-            $_SESSION['msg'] = "Brand Listed successfully";
-            header('location:manage-categories.php');
+        if (isset($lastInsertId)) {
+            $_SESSION['msg'] = "Branch Listed successfully";
+            header('location:manage-branches.php');
         } else {
-            $_SESSION['error'] = "Something went wrong. Please try again";
-            header('location:manage-categories.php');
+            $_SESSION['error'] = $lastInsertId."Something went wrong. Please try again";
+            header('location:manage-branches.php');
         }
     }
     ?>
@@ -54,6 +54,22 @@ if (strlen($_SESSION['alogin']) == 0) {
         <!-- GOOGLE FONT -->
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
 
+    <script>
+            var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+    </script>
+
     </head>
     <body>
     <!------MENU SECTION START-->
@@ -61,14 +77,8 @@ if (strlen($_SESSION['alogin']) == 0) {
     <!-- MENU SECTION END-->
     <div class="content-wrapper">
     <div class="container">
-        <div class="row pad-botm">
-            <div class="col-md-12">
-                <h4 class="header-line">Add Branches</h4>
-            </div>
-        </div>
         <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3"
-            ">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     Branch Info
@@ -77,17 +87,17 @@ if (strlen($_SESSION['alogin']) == 0) {
                     <form role="form" method="post">
                         <div class="form-group">
                             <label>Branch ID</label>
-                            <input class="form-control" type="text" name="BranchID" autocomplete="off" />
+                            <input class="form-control" type="text" name="BranchID" autocomplete="off" title="Branch Unique ID" Required/>
 
                             <label>Branch Name</label>
-                            <input class="form-control" type="text" name="BranchName" autocomplete="off" />
+                            <input class="form-control" type="text" name="BranchName" autocomplete="off" title="Branch Name" Required/>
 
                             <label>Branch City</label>
-                            <input class="form-control" type="text" name="BranchCity" />
+                            <input class="form-control" type="text" name="BranchCity" title="Branch City or Village Situated at" Required/>
 
                             <p>
                                 <label>Select District</label>
-                                <select name="District">
+                                <select class="form-control" name="District" title="Please Select a District">
                                     <option value="Ampara">Ampara</option>
                                     <option value="Anuradhapura">Anuradhapura</option>
                                     <option value="Badulla">Badulla</option>
@@ -117,28 +127,23 @@ if (strlen($_SESSION['alogin']) == 0) {
                             </p>
 
                             <label>Username</label>
-                            <input class="form-control" type="text" name="Username" />
+                            <input class="form-control" type="text" name="Username" title="Username to login by branch" Required/>
 
                             <label>Password</label>
-                            <input class="form-control" type="password" name="Password"/>
+                            <input class="form-control" type="password" name="Password" id="password" title="Password to login by branch" onkeyup='validatePassword();' Required/>
 
                             <label>Confirm Password</label>
-                            <input class="form-control" type="password" name="Confirm-Password"/>
+                            <input class="form-control" type="password" name="Confirm-Password" title="Confirm password" id="confirm_password" onkeyup='validatePassword();' Required/>
 
                             <label>Branch Type</label>
                             <div class="form-group">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="BranchType" value="1">Head Office
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="BranchType" value="2">District Head
+                                        <input type="radio" name="BranchType" value="2" title="Select this if it is District Head">District Head
                                     </label>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="BranchType" value="3" checked="checked">Regular
+                                            <input type="radio" name="BranchType" value="3" checked="checked" title="Select this if it is regular branch">Regular
                                             Branch
                                         </label>
                                     </div>

@@ -21,7 +21,7 @@ $query->bindParam(':rstatus',$rstatus,PDO::PARAM_STR);
 $query->execute();
 
 $_SESSION['msg']="Book Returned successfully";
-header('location:manage-issued-books.php');
+header('location:manage-branch-events.php');
 
 
 

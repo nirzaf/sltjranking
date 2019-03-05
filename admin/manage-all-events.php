@@ -7,8 +7,8 @@ if(strlen($_SESSION['alogin'])==0)
 header('location:index.php');
 }
 else{ 
-
-// code for block student    
+    
+    // code for Disapprove the Event    
 if(isset($_GET['inid']))
 {
 $id=$_GET['inid'];
@@ -18,12 +18,10 @@ $query = $dbh->prepare($sql);
 $query -> bindParam(':id',$id, PDO::PARAM_STR);
 $query -> bindParam(':status',$status, PDO::PARAM_STR);
 $query -> execute();
-header('location:reg-students.php');
+header('location:manage-all-events.php');
 }
 
-
-
-//code for active students
+//code for approve the events
 if(isset($_GET['id']))
 {
 $id=$_GET['id'];
@@ -33,10 +31,8 @@ $query = $dbh->prepare($sql);
 $query -> bindParam(':id',$id, PDO::PARAM_STR);
 $query -> bindParam(':status',$status, PDO::PARAM_STR);
 $query -> execute();
-header('location:reg-students.php');
+header('location:manage-all-events.php');
 }
-
-
     ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -66,7 +62,7 @@ header('location:reg-students.php');
          <div class="container">
         <div class="row pad-botm">
             <div class="col-md-12">
-                <h4 class="header-line">Manage Registered Events</h4>
+                <h4 class="header-line">Approved Events</h4>
     </div>
 
 
@@ -76,7 +72,7 @@ header('location:reg-students.php');
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                          Events
+                          Approved Events
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -86,7 +82,6 @@ header('location:reg-students.php');
                                             <th>#</th>
                                             <th>Event ID</th>
                                             <th>Event Name</th>
-                                            <th>Program Name </th>
                                             <th>Branch Name</th>
                                             <th>Event Date</th>
                                             <th>Status</th>
@@ -94,7 +89,7 @@ header('location:reg-students.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-<?php $sql = "SELECT * from tblstudents";
+<?php $sql = "SELECT * from tblstudents Where Status=1";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -105,11 +100,10 @@ foreach($results as $result)
 {               ?>                                      
                                         <tr class="odd gradeX">
                                             <td class="center"><?php echo htmlentities($cnt);?></td>
-                                            <td class="center"><?php echo htmlentities($result->StudentId);?></td>
-                                            <td class="center"><?php echo htmlentities($result->FullName);?></td>
-                                            <td class="center"><?php echo htmlentities($result->EmailId);?></td>
-                                            <td class="center"><?php echo htmlentities($result->MobileNumber);?></td>
-                                             <td class="center"><?php echo htmlentities($result->RegDate);?></td>
+                                            <td class="center"><?php echo htmlentities($result->EventID);?></td>
+                                            <td class="center"><?php echo htmlentities($result->Event_Name);?></td>
+                                            <td class="center"><?php echo htmlentities($result->Branch_Name);?></td>
+                                             <td class="center"><?php echo htmlentities($result->EventDate);?></td>
                                             <td class="center"><?php if($result->Status==1)
                                             {
                                                 echo htmlentities("Approved");
@@ -122,15 +116,15 @@ foreach($results as $result)
                                             <td class="center">
 <?php if($result->Status==1)
  {?>
-<a href="reg-students.php?inid=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to block this disapprove this Even?');"" >  <button class="btn btn-danger"> Un Approve</button>
+<a href="manage-all-events.php?inid=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to disapprove this Event?');"" >  <button class="btn btn-danger"> Disapprove</button>
 <?php } else {?>
 
-                                            <a href="reg-students.php?id=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to  approve this event?');""><button class="btn btn-primary"> Approve</button> 
+                                            <a href="manage-all-events.php?id=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to approve this event?');""><button class="btn btn-primary"> Approve</button> 
                                             <?php } ?>
                                           
                                             </td>
                                         </tr>
- <?php $cnt=$cnt+1;}} ?>                                      
+ <?php $cnt=$cnt+1;}} else{ echo htmlentities("Wow! You did it!!!"); } ?>                                      
                                     </tbody>
                                 </table>
                             </div>
@@ -139,10 +133,7 @@ foreach($results as $result)
                     </div>
                     <!--End Advanced Tables -->
                 </div>
-            </div>
-
-
-            
+            </div>            
     </div>
     </div>
 
@@ -161,4 +152,4 @@ foreach($results as $result)
     <script src="assets/js/custom.js"></script>
 </body>
 </html>
-<?php } ?>
+<?php }?>

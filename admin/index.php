@@ -40,22 +40,17 @@ echo "<script>alert('Invalid Details');</script>";
 </head>
 <body>
     <!------MENU SECTION START-->
-<?php include('includes/header.php');?>
+<?php //include('includes/header.php');?>
 <!-- MENU SECTION END-->
 <div class="content-wrapper">
 <div class="container">
-<div class="row pad-botm">
-<div class="col-md-12">
-<h4 class="header-line">ADMIN LOGIN FORM</h4>
-</div>
-</div>
-             
+
 <!--LOGIN PANEL START-->           
 <div class="row">
 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" >
 <div class="panel panel-info">
 <div class="panel-heading">
- LOGIN FORM
+ADMIN LOGIN FORM
 </div>
 <div class="panel-body">
 <form role="form" method="post">
@@ -75,10 +70,6 @@ echo "<script>alert('Invalid Details');</script>";
 </div>
 </div>  
 <!---LOGIN PABNEL END-->            
-             
- 
-    </div>
-    </div>
      <!-- CONTENT-WRAPPER SECTION END-->
  <?php include('includes/footer.php');?>
       <!-- FOOTER SECTION END-->

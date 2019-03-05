@@ -7,9 +7,31 @@ if(strlen($_SESSION['alogin'])==0)
 header('location:index.php');
 }
 else{ 
+    if(isset($_GET['inid']))
+{
+$id=$_GET['inid'];
+$status=0;
+$sql = "update tblstudents set Status=:status  WHERE id=:id";
+$query = $dbh->prepare($sql);
+$query -> bindParam(':id',$id, PDO::PARAM_STR);
+$query -> bindParam(':status',$status, PDO::PARAM_STR);
+$query -> execute();
+header('location:manage-events.php');
+}
 
-
-
+//code for approve the events
+if(isset($_GET['id']))
+{
+$id=$_GET['id'];
+$status=1;
+$sql = "update tblstudents set Status=:status  WHERE id=:id";
+$query = $dbh->prepare($sql);
+$query -> bindParam(':id',$id, PDO::PARAM_STR);
+$query -> bindParam(':status',$status, PDO::PARAM_STR);
+$query -> execute();
+header('location:manage-events.php');
+}
+   
     ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,7 +40,7 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Online Library Management System | Manage Issued Books</title>
+    <title>SLTJ Ranking Management System | Manage Events</title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -39,53 +61,15 @@ else{
          <div class="container">
         <div class="row pad-botm">
             <div class="col-md-12">
-                <h4 class="header-line">Manage Issued Books</h4>
+                <h4 class="header-line">Pending Approvals</h4>
     </div>
-     <div class="row">
-    <?php if($_SESSION['error']!="")
-    {?>
-<div class="col-md-6">
-<div class="alert alert-danger" >
- <strong>Error :</strong> 
- <?php echo htmlentities($_SESSION['error']);?>
-<?php echo htmlentities($_SESSION['error']="");?>
-</div>
-</div>
-<?php } ?>
-<?php if($_SESSION['msg']!="")
-{?>
-<div class="col-md-6">
-<div class="alert alert-success" >
- <strong>Success :</strong> 
- <?php echo htmlentities($_SESSION['msg']);?>
-<?php echo htmlentities($_SESSION['msg']="");?>
-</div>
-</div>
-<?php } ?>
-
-
-
-   <?php if($_SESSION['delmsg']!="")
-    {?>
-<div class="col-md-6">
-<div class="alert alert-success" >
- <strong>Success :</strong> 
- <?php echo htmlentities($_SESSION['delmsg']);?>
-<?php echo htmlentities($_SESSION['delmsg']="");?>
-</div>
-</div>
-<?php } ?>
-
-</div>
-
-
         </div>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                          Issued Books 
+                          Events Pending for Approvals 
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -93,16 +77,16 @@ else{
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Student Name</th>
-                                            <th>Book Name</th>
-                                            <th>ISBN </th>
-                                            <th>Issued Date</th>
-                                            <th>Return Date</th>
+                                            <th>Event ID</th>
+                                            <th>Event Name</th>
+                                            <th>Branch Name</th>
+                                            <th>Event Date</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-<?php $sql = "SELECT tblstudents.FullName,tblbooks.BookName,tblbooks.ISBNNumber,tblissuedbookdetails.IssuesDate,tblissuedbookdetails.ReturnDate,tblissuedbookdetails.id as rid from  tblissuedbookdetails join tblstudents on tblstudents.StudentId=tblissuedbookdetails.StudentId join tblbooks on tblbooks.id=tblissuedbookdetails.BookId order by tblissuedbookdetails.id desc";
+<?php $sql = "SELECT * from tblstudents Where Status=0";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -113,26 +97,31 @@ foreach($results as $result)
 {               ?>                                      
                                         <tr class="odd gradeX">
                                             <td class="center"><?php echo htmlentities($cnt);?></td>
-                                            <td class="center"><?php echo htmlentities($result->FullName);?></td>
-                                            <td class="center"><?php echo htmlentities($result->BookName);?></td>
-                                            <td class="center"><?php echo htmlentities($result->ISBNNumber);?></td>
-                                            <td class="center"><?php echo htmlentities($result->IssuesDate);?></td>
-                                            <td class="center"><?php if($result->ReturnDate=="")
+                                            <td class="center"><?php echo htmlentities($result->EventID);?></td>
+                                            <td class="center"><?php echo htmlentities($result->Event_Name);?></td>
+                                            <td class="center"><?php echo htmlentities($result->Branch_Name);?></td>
+                                             <td class="center"><?php echo htmlentities($result->EventDate);?></td>
+                                            <td class="center"><?php if($result->Status==1)
                                             {
-                                                echo htmlentities("Not Return Yet");
+                                                echo htmlentities("Approved");
                                             } else {
 
 
-                                            echo htmlentities($result->ReturnDate);
+                                            echo htmlentities("Pending");
 }
                                             ?></td>
                                             <td class="center">
+<?php if($result->Status==1)
+ {?>
+<a href="manage-events.php?inid=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to disapprove this event?');"" >  <button class="btn btn-danger"> Disapprove</button>
+<?php } else {?>
 
-                                            <a href="update-issue-bookdeails.php?rid=<?php echo htmlentities($result->rid);?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button> 
-                                         
+                                            <a href="manage-events.php?id=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to  approve this event?');""><button class="btn btn-primary"> Approve</button> 
+                                            <?php } ?>
+                                          
                                             </td>
                                         </tr>
- <?php $cnt=$cnt+1;}} ?>                                      
+ <?php $cnt=$cnt+1;}} else{ echo htmlentities("Wow! You did it!!!"); } ?>                                      
                                     </tbody>
                                 </table>
                             </div>
@@ -163,4 +152,4 @@ foreach($results as $result)
     <script src="assets/js/custom.js"></script>
 </body>
 </html>
-<?php } ?>
+<?php }?>

@@ -30,8 +30,8 @@
                             <li>
                                 <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown"> Branches <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="add-category.php">Add Branch</a></li>
-                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-categories.php">Manage Branches</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="add-branch.php">Add Branch</a></li>
+                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-branches.php">Manage Branches</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -43,15 +43,20 @@
                             </li>
  
                            <li>
-                                <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown"> Ranking Reports <i class="fa fa-angle-down"></i></a>
+                                <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown"> Manage Events List <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="issue-book.php">Pending Approvals</a></li>
-                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-issued-books.php">View Reports</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-events.php">Pending Approvals</a></li>
+                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-all-events.php">Approved Events</a></li>
+                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="all-events.php">All Listed Events</a></li>
                                 </ul>
                             </li>
-                             <li><a href="reg-students.php">Rank Summary</a></li>
+                             <li><a href="rank-summary.php">Rank Summary</a></li>
                     
-  <li><a href="change-password.php">Change Password</a></li>
+                            <li><a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown"> Change Password <i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="change-password.php">Admin Password</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="change-branch-password.php">Branch Password</a></li>
+                            </li>
                         </ul>
                     </div>
                 </div>
