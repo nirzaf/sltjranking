@@ -48,6 +48,24 @@ if (strlen($_SESSION['login']) == 0) {
         $Description = $_POST['description'];
         $DoneBy = $_POST['doneby'];
         $Crowd = $_POST['crowd'];
+        
+        $Image_1 = $_FILES['image1']['name'];
+        $Temp_Dir_1 = $_FILES['image1']['temp_name'];
+        $Image_Size_1 = $_FILES['image1']['size'];
+        
+        $Image_2 = $_FILES['image2']['name'];
+        $Temp_Dir_2 = $_FILES['image2']['temp_name'];
+        $Image_Size_2 = $_FILES['image2']['size'];
+        
+        $Upload_Dir = 'Images/';
+        $Img_Ext_1 = strtolower(pathinfo($Image_1,PATHINFO_EXTENSION));
+        $Img_Ext_2 = strtolower(pathinfo($Image_2,PATHINFO_EXTENSION));
+        $Valid_Extensions = array('jpeg','jpg','gif','png');
+        $Pic_Profile_1 = rand(1000,1000000).".".$Img_Ext_1;
+        $Pic_Profile_2 = rand(1000,1000000).".".$Img_Ext_2;
+        
+        move_uploaded_file($Temp_Dir_1,$Upload_Dir.$Pic_Profile_1);
+        move_uploaded_file($Temp_Dir_2,$Upload_Dir.$Pic_Profile_2);
         $Status  = 0;
         $TotalPoints = $Points * $Count;
         //$allString = $eventID ."+ +". $eventName ."+ +". $BranchName ."+ +". $District ."+ +". $Date ."+ +". $Description ."+ +". $DoneBy ."+ +". $Crowd ."+ +". $Status ."+ +". $Points;
@@ -56,7 +74,7 @@ if (strlen($_SESSION['login']) == 0) {
         {
         try
         {
-        $sql = "INSERT INTO tblstudents(EventID,Event_Name,Branch_Name,District,Done_By,Status,Count,Branch_Type,EventDate,Points,Crowd) VALUES(:ei,:en,:bn,:dn,:db,:st,:co,:bt,:ed,:po,:cr)";
+        $sql = "INSERT INTO tblstudents(EventID,Event_Name,Branch_Name,District,Done_By,Status,Count,Branch_Type,EventDate,Points,Crowd,image1,image2) VALUES(:ei,:en,:bn,:dn,:db,:st,:co,:bt,:ed,:po,:cr,:im1,:im2)";
         $query = $dbh->prepare($sql);
        // $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $query->bindParam(':ei', $eventID, PDO::PARAM_INT);
@@ -69,7 +87,9 @@ if (strlen($_SESSION['login']) == 0) {
         $query->bindParam(':bt', $Type, PDO::PARAM_INT);
         $query->bindParam(':ed', $Date, PDO::PARAM_STR);
         $query->bindParam(':po', $TotalPoints, PDO::PARAM_STR);
-        $query->bindParam(':cr', $Crowd, PDO::PARAM_STR);           
+        $query->bindParam(':cr', $Crowd, PDO::PARAM_STR);
+        $query->bindParam(':im1', $Pic_Profile_1, PDO::PARAM_STR);
+        $query->bindParam(':im2', $Pic_Profile_2, PDO::PARAM_STR);
         $query->execute();     
         $lastInsertId = $dbh->lastInsertId();
             if($lastInsertId)
@@ -145,7 +165,7 @@ if (strlen($_SESSION['login']) == 0) {
                             Event Info
                         </div>
                         <div class="panel-body">
-                            <form role="form" method="post">
+                            <form role="form" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label>Event Name<span style="color:red;">*</span></label>
                                     <select class="form-control" name="event" required="required">
@@ -182,9 +202,16 @@ if (strlen($_SESSION['login']) == 0) {
                                     <label>Estimated Crowd<span style="color:red;">*</span></label>
                                     <input class="form-control" type="text" name="crowd" onkeypress='validate(event)' autocomplete="off"
                                         required="required" />
+                                
+                                    <label ><span style="color:red;">Event Images 1</span></label>
+                                    <input class="form-control" type="file" name='image1' required="required"/>
+                                    
+                                    <label ><span style="color:red;">Event Images 2</span></label>
+                                    <input class="form-control" type="file" name='image2' required="required"/>
+                                    
                                     <div class="form-group"></div>
+                                    
                                     <button type="submit" name="create" class="btn btn-info">Add Event</button>
-
                             </form>
                         </div>
                     </div>
