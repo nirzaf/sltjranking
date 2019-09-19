@@ -71,7 +71,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                 <div class="panel-body">
                     <form role="form" method="post">
                         <?php
-                        $catid = intval($_GET['catid']);
+                        $catid =$_GET['catid'];
                         $sql = "SELECT * FROM tblcategory WHERE id=:catid";
                         $query = $dbh->prepare($sql);
                         $query->bindParam(':catid', $catid, PDO::PARAM_STR);
