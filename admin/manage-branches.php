@@ -123,15 +123,15 @@ header('location:manage-branches.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-<?php $sql = "SELECT * from  tblcategory";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $result)
-{               ?>                                      
+									<?php $sql = "SELECT * from  tblcategory";
+									$query = $dbh -> prepare($sql);
+									$query->execute();
+									$results=$query->fetchAll(PDO::FETCH_OBJ);
+									$cnt=1;
+									if($query->rowCount() > 0)
+									{
+									foreach($results as $result)
+									{               ?>                                      
                                         <tr class="odd gradeX">
                                             <td class="center"><?php echo htmlentities($cnt);?></td>
                                             <td class="center"><?php echo htmlentities($result->id);?></td>
@@ -144,11 +144,11 @@ foreach($results as $result)
                                             <td class="center"><?php echo htmlentities($result->CreationDate);?></td>
                                             <td class="center">
 
-                                            <!--<a href="edit-branch.php?catid=<?php // echo htmlentities($result->id);?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button> -->
+                                           <a href="edit-branch.php?catid=<?php echo htmlentities($result->id);?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button> 
                                    <?php if($result->Status ==1){ ?>         
-                                            <a href="manage-branches.php?dis=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to disable this branch?');"" >  <button class="btn btn-danger">Disable</button>
+                                            <a href="manage-branches.php?dis=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to disable this branch?');"" > <button class="btn btn-danger">Disable</button>
                                    <?php } else {?>
-                                    <a href="manage-branches.php?ena=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to enable this branch?');"" >  <button class="btn btn-success"><i class="fa fa-pencil"></i> Enable</button>
+                                    <a href="manage-branches.php?ena=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to enable this branch?');"" > <button class="btn btn-success"><i class="fa fa-pencil"></i> Enable</button>
                                     <?php } ?> </td>
                                         </tr>
  <?php $cnt=$cnt+1;}} ?>                                      

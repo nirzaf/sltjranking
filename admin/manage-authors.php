@@ -112,8 +112,7 @@ header('location:manage-authors.php');
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Event Name</th>
-                                         
+                                            <th>Event Name</th>                                        
                                             <th>Creation Date</th>
                                             <th>Points</th>
                                             <th>Action</th>
@@ -136,7 +135,7 @@ header('location:manage-authors.php');
                                             <td class="center"><?php echo htmlentities($result->Points);?></td>
                                             <td class="center">
 
-                                            <a href="edit-author.php?athrid=<?php echo htmlentities($result->id);?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button> 
+                                            <a href="edit-author.php?athrid=<?php echo htmlentities($result->id);?>"> <button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button> 
                                           <a href="manage-authors.php?del=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to delete?');"" >  <button class="btn btn-danger"><i class="fa fa-pencil"></i> Delete</button>
                                             </td>
                                         </tr>
