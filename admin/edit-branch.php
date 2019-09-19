@@ -11,7 +11,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         $BranchCity = $_POST['BranchCity'];
         $BranchType = $_POST['BranchType'];
         $status = intval($_POST['status']);
-        $catid = intval($_GET['catid']);
+        $catid = $_GET['catid'];
         $sql = "UPDATE tblcategory SET CategoryName=:branchName,BranchCity=:branchCity,Type=:branchType,Status=:status WHERE id=:catid";
         $query = $dbh->prepare($sql);
         $query->bindParam(':branchName', $BranchName, PDO::PARAM_STR);
