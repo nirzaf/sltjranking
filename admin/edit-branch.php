@@ -52,7 +52,6 @@ if (strlen($_SESSION['alogin']) == 0) {
     <!------MENU SECTION START-->
     <?php include('includes/header.php'); ?>
     <!-- MENU SECTION END-->
-    <div class="content-wra
     <div class=" content-wrapper
     ">
     <div class="container">

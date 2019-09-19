@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 include('includes/config.php');
 if(isset($_POST['login']))
@@ -42,8 +42,8 @@ echo "<script>alert('Invalid Details');</script>";
     <!------MENU SECTION START-->
 <?php //include('includes/header.php');?>
 <!-- MENU SECTION END-->
-<div class="content-wrapper">
-<div class="container">
+<div class="content-wrapper"></div>
+<div class="container"></div>
 
 <!--LOGIN PANEL START-->           
 <div class="row">
