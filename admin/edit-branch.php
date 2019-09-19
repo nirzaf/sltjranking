@@ -81,7 +81,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                         if ($query->rowCount() > 0) {
                             foreach ($results as $result) {
                                 ?>
-                                <h5 class="header-line">Edit <?php *-echo htmlentities($result->CategoryName); ?> Branch Details</h5>
+                                <h5 class="header-line">Edit <?php echo htmlentities($result->CategoryName); ?> Branch Details</h5>
                                 <div class="form-group">
                                     <label>Branch Name</label>
                                     <input class="form-control" type="text" name="BranchName"
