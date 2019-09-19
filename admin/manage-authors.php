@@ -19,8 +19,8 @@ header('location:manage-authors.php');
 
 }
 
+?>
 
-    ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -120,15 +120,15 @@ header('location:manage-authors.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-<?php $sql = "SELECT * from  tblauthors";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $result)
-{               ?>                                      
+									<?php $sql = "SELECT * from  tblauthors";
+									$query = $dbh -> prepare($sql);
+									$query->execute();
+									$results=$query->fetchAll(PDO::FETCH_OBJ);
+									$cnt=1;
+									if($query->rowCount() > 0)
+									{
+									foreach($results as $result)
+									{               ?>                                      
                                         <tr class="odd gradeX">
                                             <td class="center"><?php echo htmlentities($cnt);?></td>
                                             <td class="center"><?php echo htmlentities($result->AuthorName);?></td>
