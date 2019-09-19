@@ -9,7 +9,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         if (isset($_POST['update'])) {
         $BranchName = $_POST['BranchName'];
         $BranchCity = $_POST['BranchCity'];
-        $BranchType = intval($_POST['BranchType']);
+        $BranchType = $_POST['BranchType'];
         $status = intval($_POST['status']);
         $catid = intval($_GET['catid']);
         $sql = "UPDATE tblcategory SET CategoryName=:branchName,BranchCity=:branchCity,Type=:branchType,Status=:status WHERE id=:catid";

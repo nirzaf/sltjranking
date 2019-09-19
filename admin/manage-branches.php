@@ -144,7 +144,7 @@ foreach($results as $result)
                                             <td class="center"><?php echo htmlentities($result->CreationDate);?></td>
                                             <td class="center">
 
-                                            <!--<a href="edit-branch.php?catid=<?php // echo htmlentities($result->id);?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button> -->
+                                           <a href="edit-branch.php?catid=<?php echo htmlentities($result->id);?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button> 
                                    <?php if($result->Status ==1){ ?>         
                                             <a href="manage-branches.php?dis=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to disable this branch?');"" >  <button class="btn btn-danger">Disable</button>
                                    <?php } else {?>
