@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="library@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.1">
+    <root id="1"/>
+    <schema id="2" parent="1" name="library">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="hms"/>
+    <schema id="4" parent="1" name="hrms"/>
+    <schema id="5" parent="1" name="information_schema"/>
+    <schema id="6" parent="1" name="mysql"/>
+    <schema id="7" parent="1" name="parking"/>
+    <schema id="8" parent="1" name="performance_schema"/>
+    <schema id="9" parent="1" name="phpmyadmin"/>
+    <schema id="10" parent="1" name="sampledb"/>
+    <schema id="11" parent="1" name="schoolmanagement"/>
+    <schema id="12" parent="1" name="shop"/>
+    <schema id="13" parent="1" name="test"/>
+    <schema id="14" parent="1" name="tms"/>
+    <table id="15" parent="2" name="admin"/>
+    <table id="16" parent="2" name="tblauthors"/>
+    <table id="17" parent="2" name="tblbooks"/>
+    <table id="18" parent="2" name="tblcategory"/>
+    <table id="19" parent="2" name="tblissuedbookdetails"/>
+    <table id="20" parent="2" name="tblpoints"/>
+    <table id="21" parent="2" name="tblstudents"/>
+    <column id="22" parent="15" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="23" parent="15" name="FullName">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="24" parent="15" name="AdminEmail">
+      <Position>3</Position>
+      <DataType>varchar(120)|0</DataType>
+    </column>
+    <column id="25" parent="15" name="UserName">
+      <Position>4</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="15" name="Password">
+      <Position>5</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="27" parent="15" name="updationDate">
+      <Position>6</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
+    </column>
+    <key id="28" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="29" parent="16" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="30" parent="16" name="AuthorName">
+      <Position>2</Position>
+      <DataType>varchar(159)|0</DataType>
+    </column>
+    <column id="31" parent="16" name="Description">
+      <Position>3</Position>
+      <DataType>varchar(250)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="16" name="creationDate">
+      <Position>4</Position>
+      <DataType>timestamp|0</DataType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="33" parent="16" name="UpdationDate">
+      <Position>5</Position>
+      <DataType>timestamp|0</DataType>
+    </column>
+    <column id="34" parent="16" name="Points">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="35" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="36" parent="17" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="37" parent="17" name="BookName">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="38" parent="17" name="RegDate">
+      <Position>3</Position>
+      <DataType>timestamp|0</DataType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <key id="39" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="40" parent="18" name="id">
+      <Position>1</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="18" name="CategoryName">
+      <Position>2</Position>
+      <DataType>varchar(150)|0</DataType>
+    </column>
+    <column id="42" parent="18" name="BranchCity">
+      <Position>3</Position>
+      <DataType>varchar(150)|0</DataType>
+    </column>
+    <column id="43" parent="18" name="BranchDistrict">
+      <Position>4</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="44" parent="18" name="Username">
+      <Position>5</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="45" parent="18" name="Password">
+      <Position>6</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="46" parent="18" name="Type">
+      <Position>7</Position>
+      <DataType>int(2)|0</DataType>
+    </column>
+    <column id="47" parent="18" name="Status">
+      <Position>8</Position>
+      <DataType>int(1)|0</DataType>
+    </column>
+    <column id="48" parent="18" name="CreationDate">
+      <Position>9</Position>
+      <DataType>timestamp|0</DataType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="49" parent="18" name="UpdationDate">
+      <Position>10</Position>
+      <DataType>timestamp|0</DataType>
+      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
+    </column>
+    <key id="50" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="51" parent="19" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="52" parent="19" name="BookId">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="53" parent="19" name="StudentID">
+      <Position>3</Position>
+      <DataType>varchar(150)|0</DataType>
+    </column>
+    <column id="54" parent="19" name="IssuesDate">
+      <Position>4</Position>
+      <DataType>timestamp|0</DataType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="55" parent="19" name="ReturnDate">
+      <Position>5</Position>
+      <DataType>timestamp|0</DataType>
+    </column>
+    <column id="56" parent="19" name="RetrunStatus">
+      <Position>6</Position>
+      <DataType>int(1)|0</DataType>
+    </column>
+    <column id="57" parent="19" name="fine">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="58" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="59" parent="20" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="60" parent="20" name="Branch_Name">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="61" parent="20" name="Event_ID">
+      <Position>3</Position>
+      <DataType>int(250)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="62" parent="20" name="Program_ID">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="63" parent="20" name="Points">
+      <Position>5</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="64" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="65" parent="21" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="66" parent="21" name="StudentId">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="67" parent="21" name="EmailId">
+      <Position>3</Position>
+      <DataType>varchar(120)|0</DataType>
+    </column>
+    <column id="68" parent="21" name="MobileNumber">
+      <Position>4</Position>
+      <DataType>char(11)|0</DataType>
+    </column>
+    <column id="69" parent="21" name="Done_By">
+      <Position>5</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="70" parent="21" name="Status">
+      <Position>6</Position>
+      <DataType>int(1)|0</DataType>
+    </column>
+    <column id="71" parent="21" name="Count">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="72" parent="21" name="RegDate">
+      <Position>8</Position>
+      <DataType>timestamp|0</DataType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="73" parent="21" name="UpdationDate">
+      <Position>9</Position>
+      <DataType>timestamp|0</DataType>
+    </column>
+    <column id="74" parent="21" name="Points">
+      <Position>10</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <index id="75" parent="21" name="StudentId">
+      <ColNames>StudentId</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="76" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="77" parent="21" name="StudentId">
+      <ColNames>StudentId</ColNames>
+      <UnderlyingIndexName>StudentId</UnderlyingIndexName>
+    </key>
+  </database-model>
+</dataSource>

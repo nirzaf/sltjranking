@@ -23,9 +23,13 @@ if (isset($_POST['login'])) {
 			foreach ($results as $result) {
 				$_SESSION['id'] = $result->id;
 				$BranchName = $result->CategoryName;
+				$District = $result->BranchDistrict;
+				$Type = $result->Type;
 				if ($result->Status == 1) {
 					$_SESSION['login'] = $_POST['Username'];
 					$_SESSION['Branch'] = $BranchName;
+					$_SESSION['District'] = $District;
+					$_SESSION['Type'] = $Type;
 					echo "<script type='text/javascript'> document.location ='dashboard.php'; </script>";
 				} else {
 					echo "<script>alert('Your Account Has been blocked .Please contact admin');</script>";
@@ -65,7 +69,7 @@ if (isset($_POST['login'])) {
 	<div class="container">
 		<div class="row pad-botm">
 			<div class="col-md-12">
-				<h4 class="header-line">BRANCH LOGIN FORM</h4>
+				<h4 class="text-center">BRANCH LOGIN FORM</h4>
 			</div>
 		</div>
 
@@ -103,10 +107,6 @@ if (isset($_POST['login'])) {
 			</div>
 		</div>
 		<!---LOGIN PABNEL END-->
-
-
-	</div>
-</div>
 <!-- CONTENT-WRAPPER SECTION END-->
 <?php include('includes/footer.php'); ?>
 <!-- FOOTER SECTION END-->
