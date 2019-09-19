@@ -1,2 +1,2 @@
 # sltjranking
-Ranking Management System for SLTJ in PHP
+Ranking Management System for Sri Lanka Thawheedh Jamath in PHP

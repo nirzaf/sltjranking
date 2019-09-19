@@ -72,7 +72,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                 <div class="panel-body">
                     <form role="form" method="post">
                         <?php
-                        $catid = $_GET['catid'];
+                        $catid = intval($_GET['catid']);
                         $sql = "SELECT * FROM tblcategory WHERE id=:catid";
                         $query = $dbh->prepare($sql);
                         $query->bindParam(':catid', $catid, PDO::PARAM_STR);
@@ -81,7 +81,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                         if ($query->rowCount() > 0) {
                             foreach ($results as $result) {
                                 ?>
-                                <h5 class="header-line">Edit <?php echo htmlentities($result->CategoryName); ?> Branch Details</h5>
+                                <h5 class="header-line">Edit <?php *-echo htmlentities($result->CategoryName); ?> Branch Details</h5>
                                 <div class="form-group">
                                     <label>Branch Name</label>
                                     <input class="form-control" type="text" name="BranchName"

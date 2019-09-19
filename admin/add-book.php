@@ -51,6 +51,7 @@ header('location:manage-books.php');
       <!------MENU SECTION START-->
 <?php include('includes/header.php');?>
 <!-- MENU SECTION END-->
+    <div class="content-wra
     <div class="content-wrapper">
          <div class="container">
         <div class="row pad-botm">
@@ -73,6 +74,12 @@ Program Info
 <input class="form-control" type="text" name="bookname" autocomplete="off"  required />
 </div>
 
+<!--
+
+<div class="form-group">
+<label> Category<span style="color:red;">*</span></label>
+<select class="form-control" name="category" required="required">
+<option value=""> Select Category</option>
 <?php 
 $status=1;
 $sql = "SELECT * from  tblcategory where Status=:status";

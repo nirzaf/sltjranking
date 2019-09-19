@@ -19,8 +19,8 @@ header('location:manage-authors.php');
 
 }
 
-?>
 
+    ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -112,22 +112,23 @@ header('location:manage-authors.php');
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Event Name</th>                                        
+                                            <th>Event Name</th>
+                                         
                                             <th>Creation Date</th>
                                             <th>Points</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-									<?php $sql = "SELECT * from  tblauthors";
-									$query = $dbh -> prepare($sql);
-									$query->execute();
-									$results=$query->fetchAll(PDO::FETCH_OBJ);
-									$cnt=1;
-									if($query->rowCount() > 0)
-									{
-									foreach($results as $result)
-									{               ?>                                      
+<?php $sql = "SELECT * from  tblauthors";
+$query = $dbh -> prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $result)
+{               ?>                                      
                                         <tr class="odd gradeX">
                                             <td class="center"><?php echo htmlentities($cnt);?></td>
                                             <td class="center"><?php echo htmlentities($result->AuthorName);?></td>
@@ -135,7 +136,7 @@ header('location:manage-authors.php');
                                             <td class="center"><?php echo htmlentities($result->Points);?></td>
                                             <td class="center">
 
-                                            <a href="edit-author.php?athrid=<?php echo htmlentities($result->id);?>"> <button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button> 
+                                            <a href="edit-author.php?athrid=<?php echo htmlentities($result->id);?>"><button class="btn btn-primary"><i class="fa fa-edit "></i> Edit</button> 
                                           <a href="manage-authors.php?del=<?php echo htmlentities($result->id);?>" onclick="return confirm('Are you sure you want to delete?');"" >  <button class="btn btn-danger"><i class="fa fa-pencil"></i> Delete</button>
                                             </td>
                                         </tr>
