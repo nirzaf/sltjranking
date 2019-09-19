@@ -10,12 +10,13 @@ header('location:index.php');
 else{ 
 if(isset($_POST['change']))
   {
-$password=md5($_POST['password']);
+//$password=md5($_POST['password']);
 $newpassword=md5($_POST['newpassword']);
 $branchId =$_POST['branch'];
-$sql ="SELECT id,CategoryName FROM tblcategory where Password=:password AND id=:id";
+//$sql ="SELECT id,CategoryName FROM tblcategory where Password=:password AND id=:id";
+    $sql = "SELECT id,CategoryName FROM tblcategory WHERE id=:id";
 $query= $dbh -> prepare($sql);
-$query-> bindParam(':password', $password, PDO::PARAM_STR);
+//$query-> bindParam(':password', $password, PDO::PARAM_STR);
 $query-> bindParam(':id', $branchId, PDO::PARAM_STR);
 $query-> execute();
 $results = $query -> fetchAll(PDO::FETCH_OBJ);
@@ -74,7 +75,7 @@ $error="Given Current password is wrong";
 <script type="text/javascript">
 function valid()
 {
-if(document.chngpwd.newpassword.value!= document.chngpwd.confirmpassword.value)
+    if (document.chngpwd.newpassword.value !== document.chngpwd.confirmpassword.value)
 {
 alert("New Password and Confirm Password Field do not match  !!");
 document.chngpwd.confirmpassword.focus();
@@ -119,10 +120,10 @@ Change Password
                                     </select>
 </div>
 
-<div class="form-group">
-<label>Current Password<span style="color:red;">*</span></label>
-<input class="form-control" type="password" name="password" autocomplete="off" required  />
-</div>
+    <!-- <div class="form-group">
+    <label>Current Password<span style="color:red;">*</span></label>
+    <input class="form-control" type="password" name="password" autocomplete="off" required  />
+    </div> -->
 
 <div class="form-group">
 <label>Enter Password<span style="color:red;">*</span></label>
