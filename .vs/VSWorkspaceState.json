@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\admin",
+    "\\admin\\includes\\admin\\includes"
   ],
-  "SelectedNode": "\\captcha.php",
+  "SelectedNode": "\\admin\\dashboard.php",
   "PreviewInSolutionExplorer": false
 }

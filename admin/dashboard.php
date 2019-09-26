@@ -151,7 +151,6 @@ foreach($results as $result)
      <!-- CONTENT-WRAPPER SECTION END-->
 <?php include('includes/footer.php');?>
       <!-- FOOTER SECTION END-->
-    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
     <!-- CORE JQUERY  -->
     <script src="assets/js/jquery-1.10.2.js"></script>
     <!-- BOOTSTRAP SCRIPTS  -->
