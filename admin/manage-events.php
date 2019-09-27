@@ -104,10 +104,10 @@ foreach($results as $result)
                                             <td class="center"><?php echo htmlentities($result->Branch_Name);?></td>
                                              <td class="center"><?php echo htmlentities($result->EventDate);?></td>
 											<td class="center">
-												<a href="<?php echo 'uploads/'.($result->image1).'jpg';?>">View</a>
+												<a href="<?php echo '../Images/'.($result->image1).'jpg';?>">View</a>
 											</td>
 											<td class="center">
-												<a href="<?php echo 'uploads/'.($result->image2).'jpg';?>">View</a>
+												<a href="<?php echo '../Images/'.($result->image2).'jpg';?>">View</a>
 											</td>
                                             <td class="center"><?php if($result->Status==1)
                                             {
