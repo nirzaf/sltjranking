@@ -57,15 +57,22 @@ if (strlen($_SESSION['login']) == 0) {
         $Temp_Dir_2 = $_FILES['image2']['temp_name'];
         $Image_Size_2 = $_FILES['image2']['size'];
         
-        $Upload_Dir = "admin/images/";
+        $images = "admin/images/";
         $Img_Ext_1 = strtolower(pathinfo($Image_1,PATHINFO_EXTENSION));
         $Img_Ext_2 = strtolower(pathinfo($Image_2,PATHINFO_EXTENSION));
         $Valid_Extensions = array('jpeg','jpg','gif','png');
         $Pic_1 = rand(1000,1000000).".".$Img_Ext_1;
         $Pic_2 = rand(1000,1000000).".".$Img_Ext_2;
         
-        move_uploaded_file($Temp_Dir_1,$Upload_Dir.$Pic_1);
-        move_uploaded_file($Temp_Dir_2,$Upload_Dir.$Pic_2);
+        $result1 = move_uploaded_file($Temp_Dir_1,$images.$Pic_1);
+        $result1 = move_uploaded_file($Temp_Dir_2,$images.$Pic_2);
+
+		echo "<script>alert('$$result1 + $result2')</script>";
+
+		if($result1 == true && $result2 == true ){
+			echo "<script>alert('Image successfully Uploaded')</script>";
+		}
+
         $Status  = 0;
         $TotalPoints = $Points * $Count;
         try
@@ -74,7 +81,6 @@ if (strlen($_SESSION['login']) == 0) {
 			{
 			$sql = "INSERT INTO tblstudents(EventID,Event_Name,Branch_Name,District,Done_By,Status,Count,Branch_Type,EventDate,Points,Crowd,image1,image2) VALUES(:ei,:en,:bn,:dn,:db,:st,:co,:bt,:ed,:po,:cr,:im1,:im2)";
 			$query = $dbh->prepare($sql);
-		   // $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$query->bindParam(':ei', $eventID, PDO::PARAM_INT);
 			$query->bindParam(':en', $eventName, PDO::PARAM_STR);
 			$query->bindParam(':bn', $BranchName, PDO::PARAM_STR);

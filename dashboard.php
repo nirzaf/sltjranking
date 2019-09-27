@@ -112,7 +112,7 @@ $totalPoints=$results3['TotalPoints'];
                                         </tr>
                                     </thead>
                                     <tbody>
-<?php $sql = "SELECT Branch_Name,Sum(Points) As `Total_Points` from  tblstudents Group by Branch_Name Order by Points DESC";
+<?php $sql = "SELECT Branch_Name,Sum(Points) As `Total_Points` from  tblstudents Where status = 1 Group by Branch_Name Order by Points DESC";
 $qu = $dbh -> prepare($sql);
 $qu->execute();
 $re=$qu->fetchAll(PDO::FETCH_OBJ);
