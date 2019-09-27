@@ -64,8 +64,6 @@ header('location:all-events.php');
             <div class="col-md-12">
                 <h4 class="header-line">All Listed Events</h4>
     </div>
-
-
         </div>
             <div class="row">
                 <div class="col-md-12">
@@ -79,13 +77,15 @@ header('location:all-events.php');
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Event ID</th>
-                                            <th>Event Name</th>
-                                            <th>Branch Name</th>
-                                            <th>Event Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+											<th>#</th>
+											<th>Event ID</th>
+											<th>Event Name</th>
+											<th>Branch Name</th>
+											<th>Event Date</th>
+											<th>Image 1</th>
+											<th>Image 2</th>
+											<th>Status</th>
+											<th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -104,6 +104,12 @@ foreach($results as $result)
                                             <td class="center"><?php echo htmlentities($result->Event_Name);?></td>
                                             <td class="center"><?php echo htmlentities($result->Branch_Name);?></td>
                                              <td class="center"><?php echo htmlentities($result->EventDate);?></td>
+											<td class="center">
+												<a href="<?php echo 'uploads/'.($result->image1).'jpg';?>">View</a>
+											</td>
+											<td class="center">
+												<a href="<?php echo 'uploads/'.($result->image2).'jpg';?>">View</a>
+											</td>
                                             <td class="center"><?php if($result->Status==1)
                                             {
                                                 echo htmlentities("Approved");

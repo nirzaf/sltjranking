@@ -76,19 +76,21 @@ header('location:manage-events.php');
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Event ID</th>
-                                            <th>Event Name</th>
-                                            <th>Branch Name</th>
-                                            <th>Event Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+											<th>#</th>
+											<th>Event ID</th>
+											<th>Event Name</th>
+											<th>Branch Name</th>
+											<th>Event Date</th>
+											<th>Image 1</th>
+											<th>Image 2</th>
+											<th>Status</th>
+											<th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 <?php $sql = "SELECT * from tblstudents Where Status=0";
-$query = $dbh -> prepare($sql);
-$query->execute();
+	  $query = $dbh -> prepare($sql);
+	  $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
 if($query->rowCount() > 0)
@@ -101,6 +103,12 @@ foreach($results as $result)
                                             <td class="center"><?php echo htmlentities($result->Event_Name);?></td>
                                             <td class="center"><?php echo htmlentities($result->Branch_Name);?></td>
                                              <td class="center"><?php echo htmlentities($result->EventDate);?></td>
+											<td class="center">
+												<a href="<?php echo 'uploads/'.($result->image1).'jpg';?>">View</a>
+											</td>
+											<td class="center">
+												<a href="<?php echo 'uploads/'.($result->image2).'jpg';?>">View</a>
+											</td>
                                             <td class="center"><?php if($result->Status==1)
                                             {
                                                 echo htmlentities("Approved");
