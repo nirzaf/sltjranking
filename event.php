@@ -57,7 +57,7 @@ if (strlen($_SESSION['login']) == 0) {
         $Temp_Dir_2 = $_FILES['image2']['temp_name'];
         $Image_Size_2 = $_FILES['image2']['size'];
         
-        $Upload_Dir = 'Images/';
+        $Upload_Dir = "admin/images/";
         $Img_Ext_1 = strtolower(pathinfo($Image_1,PATHINFO_EXTENSION));
         $Img_Ext_2 = strtolower(pathinfo($Image_2,PATHINFO_EXTENSION));
         $Valid_Extensions = array('jpeg','jpg','gif','png');
