@@ -61,58 +61,56 @@ if (strlen($_SESSION['login']) == 0) {
         $Img_Ext_1 = strtolower(pathinfo($Image_1,PATHINFO_EXTENSION));
         $Img_Ext_2 = strtolower(pathinfo($Image_2,PATHINFO_EXTENSION));
         $Valid_Extensions = array('jpeg','jpg','gif','png');
-        $Pic_Profile_1 = rand(1000,1000000).".".$Img_Ext_1;
-        $Pic_Profile_2 = rand(1000,1000000).".".$Img_Ext_2;
+        $Pic_1 = rand(1000,1000000).".".$Img_Ext_1;
+        $Pic_2 = rand(1000,1000000).".".$Img_Ext_2;
         
-        move_uploaded_file($Temp_Dir_1,$Upload_Dir.$Pic_Profile_1);
-        move_uploaded_file($Temp_Dir_2,$Upload_Dir.$Pic_Profile_2);
+        move_uploaded_file($Temp_Dir_1,$Upload_Dir.$Pic_1);
+        move_uploaded_file($Temp_Dir_2,$Upload_Dir.$Pic_2);
         $Status  = 0;
         $TotalPoints = $Points * $Count;
-        //$allString = $eventID ."+ +". $eventName ."+ +". $BranchName ."+ +". $District ."+ +". $Date ."+ +". $Description ."+ +". $DoneBy ."+ +". $Crowd ."+ +". $Status ."+ +". $Points;
-        //echo "<script>alert('$allString')</script>"; 
         try
         {
-        try
-        {
-        $sql = "INSERT INTO tblstudents(EventID,Event_Name,Branch_Name,District,Done_By,Status,Count,Branch_Type,EventDate,Points,Crowd,image1,image2) VALUES(:ei,:en,:bn,:dn,:db,:st,:co,:bt,:ed,:po,:cr,:im1,:im2)";
-        $query = $dbh->prepare($sql);
-       // $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $query->bindParam(':ei', $eventID, PDO::PARAM_INT);
-        $query->bindParam(':en', $eventName, PDO::PARAM_STR);
-        $query->bindParam(':bn', $BranchName, PDO::PARAM_STR);
-        $query->bindParam(':dn', $BranchName, PDO::PARAM_STR);
-        $query->bindParam(':db', $DoneBy, PDO::PARAM_STR);
-        $query->bindParam(':st', $Status , PDO::PARAM_INT);
-        $query->bindParam(':co', $Count, PDO::PARAM_INT);
-        $query->bindParam(':bt', $Type, PDO::PARAM_INT);
-        $query->bindParam(':ed', $Date, PDO::PARAM_STR);
-        $query->bindParam(':po', $TotalPoints, PDO::PARAM_STR);
-        $query->bindParam(':cr', $Crowd, PDO::PARAM_STR);
-        $query->bindParam(':im1', $Pic_Profile_1, PDO::PARAM_STR);
-        $query->bindParam(':im2', $Pic_Profile_2, PDO::PARAM_STR);
-        $query->execute();     
-        $lastInsertId = $dbh->lastInsertId();
-            if($lastInsertId)
-            {              
-                $_SESSION['msg'] = "Event Listed successfully";
-                header('location:manage-events.php');
-            }else
-            {
-                echo "<script>alert('Oops! Please try again')</script>";
-            }      
-        }
-        catch(PDOException $db) 
-        {
-            $_SESSION['error'] = $db." Something went wrong. Please try again";
-            header('location:manage-events.php');
-        }
-    }
-    catch(PDOException $ex)
-        {
-            $error = $ex;
-            throw $ex; 
-        }
-    }
+			try
+			{
+			$sql = "INSERT INTO tblstudents(EventID,Event_Name,Branch_Name,District,Done_By,Status,Count,Branch_Type,EventDate,Points,Crowd,image1,image2) VALUES(:ei,:en,:bn,:dn,:db,:st,:co,:bt,:ed,:po,:cr,:im1,:im2)";
+			$query = $dbh->prepare($sql);
+		   // $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$query->bindParam(':ei', $eventID, PDO::PARAM_INT);
+			$query->bindParam(':en', $eventName, PDO::PARAM_STR);
+			$query->bindParam(':bn', $BranchName, PDO::PARAM_STR);
+			$query->bindParam(':dn', $BranchName, PDO::PARAM_STR);
+			$query->bindParam(':db', $DoneBy, PDO::PARAM_STR);
+			$query->bindParam(':st', $Status , PDO::PARAM_INT);
+			$query->bindParam(':co', $Count, PDO::PARAM_INT);
+			$query->bindParam(':bt', $Type, PDO::PARAM_INT);
+			$query->bindParam(':ed', $Date, PDO::PARAM_STR);
+			$query->bindParam(':po', $TotalPoints, PDO::PARAM_STR);
+			$query->bindParam(':cr', $Crowd, PDO::PARAM_STR);
+			$query->bindParam(':im1', $Pic_Profile_1, PDO::PARAM_STR);
+			$query->bindParam(':im2', $Pic_Profile_2, PDO::PARAM_STR);
+			$query->execute();     
+			$lastInsertId = $dbh->lastInsertId();
+				if($lastInsertId)
+				{              
+					$_SESSION['msg'] = "Event Listed successfully";
+					header('location:manage-events.php');
+				}else
+				{
+					echo "<script>alert('Oops! Please try again')</script>";
+				}      
+			}
+			catch(PDOException $db) 
+			{
+				$_SESSION['error'] = $db." Something went wrong. Please try again";
+				header('location:manage-events.php');
+			}
+		}
+		catch(PDOException $ex)
+			{
+				$error = $ex;
+				throw $ex; 
+			}
+		}
     ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
