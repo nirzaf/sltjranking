@@ -180,7 +180,8 @@ if (strlen($_SESSION['login']) == 0) {
                                     foreach ($results as $result) { ?>
                                         <option value="<?php echo htmlentities($result->id); ?>">
                                             <?php echo htmlentities($result->AuthorName); ?></option>
-                                        <?php } }?>
+                                        <?php }
+								}?>
                                     </select>
 
                                     <label>Event Count<span style="color:red;">*</span></label>
@@ -188,20 +189,16 @@ if (strlen($_SESSION['login']) == 0) {
                                         autocomplete="off" required />
 
                                     <label>Event Date<span style="color:red;">*</span></label>
-                                    <input class="form-control" type="date" name="eventDate" autocomplete="off"
-                                        required />
-
+                                    <input class="form-control" type="date" name="eventDate" autocomplete="off" required />
+                                        
                                     <label>Description</label>
-                                    <input class="form-control" type="text" name="description" placeholder="Optional"
-                                        autocomplete="off" />
-
+                                    <input class="form-control" type="text" name="description" placeholder="Optional" autocomplete="off" />
+                                       
                                     <label>Done by<span style="color:red;">*</span></label>
-                                    <input class="form-control" type="text" name="doneby" required="required"
-                                        autocomplete="off" />
+                                    <input class="form-control" type="text" name="doneby" required="required" autocomplete="off" />
 
                                     <label>Estimated Crowd<span style="color:red;">*</span></label>
-                                    <input class="form-control" type="text" name="crowd" onkeypress='validate(event)' autocomplete="off"
-                                        required="required" />
+                                    <input class="form-control" placeholder="Optional" type="text" name="crowd" onkeypress='validate(event)' autocomplete="off"/>
                                 
                                     <label ><span style="color:red;">Event Images 1</span></label>
                                     <input class="form-control" type="file" name='image1' required="required"/>
