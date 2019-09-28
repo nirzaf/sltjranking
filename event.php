@@ -11,7 +11,7 @@ if (strlen($_SESSION['login']) == 0) {
     header('location:index.php');
 } else {
 
-    if (isset($_POST['create'])) {
+    if (isset($_POST['submit'])) {
         $eventID = $_POST['event'];
         $abc = "SELECT * FROM  tblauthors Where id=:eventID";
         $que = $dbh->prepare($abc);
@@ -40,6 +40,7 @@ if (strlen($_SESSION['login']) == 0) {
         {
             echo "<script>alert('Error')</script>";
         }
+
         $Count = $_POST['count'];
         $Type= $_SESSION['Type'];
         $BranchName = $_SESSION['Branch'];
@@ -49,7 +50,9 @@ if (strlen($_SESSION['login']) == 0) {
         $DoneBy = $_POST['doneby'];
         $Crowd = $_POST['crowd'];
         
-        $Image_1 = $_FILES['image1']['name'];
+		echo "<script>alert('Success')</script>";
+
+		$Image_1 = $_FILES['image1']['name'];
         $Temp_Dir_1 = $_FILES['image1']['temp_name'];
         $Image_Size_1 = $_FILES['image1']['size'];
         
@@ -60,14 +63,12 @@ if (strlen($_SESSION['login']) == 0) {
         $images = "admin/images/";
         $Img_Ext_1 = strtolower(pathinfo($Image_1,PATHINFO_EXTENSION));
         $Img_Ext_2 = strtolower(pathinfo($Image_2,PATHINFO_EXTENSION));
-        $Valid_Extensions = array('jpeg','jpg','gif','png');
+        $Valid_Extensions = array('jpeg','jpg','png');
         $Pic_1 = rand(1000,1000000).".".$Img_Ext_1;
         $Pic_2 = rand(1000,1000000).".".$Img_Ext_2;
         
         $result1 = move_uploaded_file($Temp_Dir_1,$images.$Pic_1);
         $result1 = move_uploaded_file($Temp_Dir_2,$images.$Pic_2);
-
-		echo "<script>alert('$$result1 + $result2')</script>";
 
 		if($result1 == true && $result2 == true ){
 			echo "<script>alert('Image successfully Uploaded')</script>";
@@ -92,8 +93,8 @@ if (strlen($_SESSION['login']) == 0) {
 			$query->bindParam(':ed', $Date, PDO::PARAM_STR);
 			$query->bindParam(':po', $TotalPoints, PDO::PARAM_STR);
 			$query->bindParam(':cr', $Crowd, PDO::PARAM_STR);
-			$query->bindParam(':im1', $Pic_Profile_1, PDO::PARAM_STR);
-			$query->bindParam(':im2', $Pic_Profile_2, PDO::PARAM_STR);
+			$query->bindParam(':im1', $Pic_1, PDO::PARAM_STR);
+			$query->bindParam(':im2', $Pic_2, PDO::PARAM_STR);
 			$query->execute();     
 			$lastInsertId = $dbh->lastInsertId();
 				if($lastInsertId)
@@ -175,17 +176,17 @@ if (strlen($_SESSION['login']) == 0) {
                                     <select class="form-control" name="event" required="required">
                                         <option value=""> Select Event</option>
                                         <?php
-                                $sql = "SELECT * FROM  tblauthors";
-                                $query = $dbh->prepare($sql);
-                                $query->execute();
-                                $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                $cnt = 1;
-                                if ($query->rowCount() > 0) {
-                                    foreach ($results as $result) { ?>
-                                        <option value="<?php echo htmlentities($result->id); ?>">
-                                            <?php echo htmlentities($result->AuthorName); ?></option>
-                                        <?php }
-								}?>
+									$sql = "SELECT * FROM  tblauthors";
+									$query = $dbh->prepare($sql);
+									$query->execute();
+									$results = $query->fetchAll(PDO::FETCH_OBJ);
+									$cnt = 1;
+									if ($query->rowCount() > 0) {
+										foreach ($results as $result) { ?>
+											<option value="<?php echo htmlentities($result->id); ?>">
+												<?php echo htmlentities($result->AuthorName); ?></option>
+											<?php }
+									}?>
                                     </select>
 
                                     <label>Event Count<span style="color:red;">*</span></label>
@@ -204,15 +205,15 @@ if (strlen($_SESSION['login']) == 0) {
                                     <label>Estimated Crowd<span style="color:red;">*</span></label>
                                     <input class="form-control" placeholder="Optional" type="text" name="crowd" onkeypress='validate(event)' autocomplete="off"/>
                                 
-                                    <label ><span style="color:red;">Event Images 1</span></label>
+                                    <label ><span style="color:red;">Event Image 1</span></label>
                                     <input class="form-control" type="file" name='image1' required="required"/>
                                     
-                                    <label ><span style="color:red;">Event Images 2</span></label>
+                                    <label ><span style="color:red;">Event Image 2</span></label>
                                     <input class="form-control" type="file" name='image2' required="required"/>
                                     
                                     <div class="form-group"></div>
                                     
-                                    <button type="submit" name="create" class="btn btn-info">Add Event</button>
+                                    <button type="submit" name="submit" class="btn btn-info">Add Event</button>
                             </form>
                         </div>
                     </div>
