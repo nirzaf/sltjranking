@@ -4,6 +4,8 @@
 
 The SLTJ Ranking Management System is a web-based application developed in PHP for managing the ranking system of Sri Lanka Thawheedh Jamath (SLTJ). The system allows administrators to manage events, users, and rankings efficiently. It provides a platform for branches to register events, track their progress, and view their rankings.
 
+For detailed requirements, refer to the [Software Requirements Specification (SRS)](SRS.md) document.
+
 ## Features
 
 - Event Management: Add, edit, and delete events.
@@ -20,6 +22,8 @@ The SLTJ Ranking Management System is a web-based application developed in PHP f
 3. Open phpMyAdmin and create a new database named `sltjranking`.
 4. Import the `library.sql` file located in the `admin/includes/sqlfile` directory into the `sltjranking` database.
 5. Update the database configuration in the `admin/includes/config.php` file with your database credentials.
+
+Refer to the [Software Requirements Specification (SRS)](SRS.md) document for detailed requirements.
 
 ## Usage
 
